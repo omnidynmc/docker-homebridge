@@ -3,7 +3,7 @@ FROM ubuntu:20.04
 LABEL org.opencontainers.image.title="Homebridge in Docker"
 LABEL org.opencontainers.image.description="Official Homebridge Docker Image"
 LABEL org.opencontainers.image.authors="oznu"
-LABEL org.opencontainers.image.url="https://github.com/oznu/docker-homebridge"
+LABEL org.opencontainers.image.url="https://github.com/omnidynmc/docker-homebridge"
 LABEL org.opencontainers.image.licenses="GPL-3.0"
 
 ENV S6_OVERLAY_VERSION=3.1.1.2 \
@@ -66,6 +66,7 @@ RUN case "$(uname -m)" in \
   && dpkg -i /homebridge_${HOMEBRIDGE_PKG_VERSION}.deb \
   && rm -rf /homebridge_${HOMEBRIDGE_PKG_VERSION}.deb \
   && chown -R root:root /opt/homebridge \
+  && npm install -g homebridge-aqualinkd \
   && rm -rf /var/lib/homebridge
 
 COPY rootfs /
